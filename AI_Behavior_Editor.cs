@@ -72,6 +72,7 @@ public class AI_Behavior_Editor : EditorWindow
             EditorGUILayout.BeginHorizontal();
             selectedBehavior.conditions[i].conditionType = (ConditionType)EditorGUILayout.EnumPopup("Type", selectedBehavior.conditions[i].conditionType);
             selectedBehavior.conditions[i].value = EditorGUILayout.FloatField("Value", selectedBehavior.conditions[i].value);
+            selectedBehavior.conditions[i].comparison = (ComparisonType)EditorGUILayout.EnumPopup("Comparison", selectedBehavior.conditions[i].comparison);
             if (GUILayout.Button("X", GUILayout.Width(20)))
                 selectedBehavior.conditions.RemoveAt(i);
             EditorGUILayout.EndHorizontal();
@@ -89,14 +90,52 @@ public class AI_Behavior
     public BehaviorType behaviorType;
     public string description;
     public List<Condition> conditions = new List<Condition>();
+    public float priority = 1.0f;
+    public float cooldown = 0.0f;
+
+    public AI_Behavior()
+    {
+        // Add default conditions based on behavior type
+        switch (behaviorType)
+        {
+            case BehaviorType.MeleeAttack:
+                conditions.Add(new Condition { conditionType = ConditionType.Health, value = 50f });
+                conditions.Add(new Condition { conditionType = ConditionType.Distance, value = 2f });
+                break;
+
+            case BehaviorType.Flee:
+                conditions.Add(new Condition { conditionType = ConditionType.Health, value = 25f });
+                conditions.Add(new Condition { conditionType = ConditionType.EnemyCount, value = 3f });
+                break;
+
+            case BehaviorType.Guard:
+                conditions.Add(new Condition { conditionType = ConditionType.Distance, value = 10f });
+                conditions.Add(new Condition { conditionType = ConditionType.InCombat, value = 0f });
+                break;
+        }
+    }
 }
 
 public enum BehaviorType
 {
-    Patrol,
-    Chase,
+    MeleeAttack,
+    RangedAttack,
+    Defend,
     Flee,
-    Idle
+    Chase,
+    Patrol,
+    Idle,
+    Wander,
+    Guard,
+    ReturnToSpawn,
+    Gather,
+    Trade,
+    Interact,
+    CallForHelp,
+    Rest,
+    Eat,
+    Heal,
+    Hide
 }
 
 [System.Serializable]
@@ -104,12 +143,39 @@ public class Condition
 {
     public ConditionType conditionType;
     public float value;
+    public ComparisonType comparison = ComparisonType.GreaterThan;
 }
 
 public enum ConditionType
 {
-    Distance,
     Health,
-    Hunger,
-    Thirst
+    Stamina,
+    Mana,
+    Energy,
+    InCombat,
+    TargetHealth,
+    EnemyCount,
+    Damage,
+    Distance,
+    TimeOfDay,
+    Weather,
+    Visibility,
+    GroupSize,
+    AllyHealth,
+    Reputation,
+    Territory,
+    Inventory,
+    Equipment,
+    Gold,
+    Resources
+}
+
+public enum ComparisonType
+{
+    LessThan,
+    GreaterThan,
+    Equals,
+    NotEquals,
+    LessThanOrEqual,
+    GreaterThanOrEqual
 }
