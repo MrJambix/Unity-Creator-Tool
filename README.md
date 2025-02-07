@@ -32,6 +32,40 @@ To use the Memory Leak Detector, follow these steps:
 4. **Analyze the Results**: The tool will analyze the heap size and object count over time, as well as the frame rate and render time.
 5. **View Alerts**: If a memory leak or bad frame drop is detected, the tool will display an alert and provide details about the issue.
 
+## LightingController
+
+Create a new UI canvas in your scene by going to GameObject > UI > Canvas.
+Create a new material editor by going to GameObject > UI > Material Editor.
+Assign the material editor to the corresponding variable in the inspector.
+Attach the script to a GameObject in your scene.
+
+## Quest System Editor
+Create a new scene in your Unity project.
+Add a QuestSystemEditor game object to the scene.
+Configure the quest system by adding quests, objectives, and rewards.
+Use the IsQuestCompleted function to check if a quest is completed.
+Use the RewardPlayer function to reward the player for completing a quest.
+
+## Character Progression Editor
+Create a new scene in your Unity project.
+Add a CharacterProgressionEditor game object to the scene.
+Configure the character progression system by adding characters, levels, and skills.
+Use the GetExperienceRequiredForNextLevel function to calculate the experience required for the next level.
+Use the LevelUpCharacter function to level up a character.
+
+## Itemization System Editor
+Create a new scene in your Unity project.
+Add an ItemizationSystemEditor game object to the scene.
+Configure the itemization system by adding items, weights, and values.
+Use the IsItemEquipped function to check if an item is equipped.
+Use the ApplyItemEffects function to apply an item's effects.
+
+## Combat Mechanics Editor
+Create a new scene in your Unity project.
+Add a CombatMechanicsEditor game object to the scene.
+Configure the combat mechanics system by adding enemies, health, and damage.
+Use the AttackPlayer function to attack the player.
+
 ## Getting-Started
 
 To get started with the Unity Creator Tool and Memory Leak Detector, follow these steps:
